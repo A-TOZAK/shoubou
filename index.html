@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火事からまちを守る！ 3年生にできること</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.8;
+        }
+        
+        /* アニメーション */
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px rgba(234, 88, 12, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(234, 88, 12, 0.8), 0 0 30px rgba(234, 88, 12, 0.6); }
+        }
+        
+        .animate-bounce-gentle {
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        .animate-shake {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        .nav-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+        
+        .nav-card:hover::before {
+            left: 100%;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        }
+        
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .interactive-element:hover {
+            opacity: 0.8;
+        }
+        
+        .source-link {
+            transition: all 0.2s ease;
+        }
+        
+        .source-link:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            margin: auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .section-header {
+            border-left: 4px solid;
+            padding-left: 1rem;
+        }
+        
+        .card-simple {
+            transition: all 0.3s ease;
+        }
+        
+        .card-simple:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        input[type="checkbox"]:checked {
+            transform: scale(1.1);
+        }
+        
+        .tab-button {
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .tab-button.active {
+            font-weight: 700;
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: currentColor;
+        }
+        
+        /* スクロールバーのスタイリング */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* 火のアニメーション */
+        .fire-icon {
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(234, 88, 12, 0.5));
+        }
+        
+        /* SVG アニメーション */
+        .icon-svg {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-card:hover .icon-svg {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* キラキラエフェクト */
+        .sparkle {
+            position: relative;
+        }
+        
+        .sparkle::after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+            animation: sparkle-animation 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle-animation {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <div class="container max-w-6xl mx-auto p-3 sm:p-4 lg:p-6 min-h-screen">
+        
+        <!-- ヘッダー -->
+        <header class="text-center mb-4 bg-white rounded-lg shadow-sm p-4 border-t-4 border-orange-500 overflow-hidden relative">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 animate-pulse-slow"></div>
+            <div class="animate-bounce-gentle inline-block">
+                <h1 class="text-3xl sm:text-4xl font-bold text-orange-600 mb-2">
+                    <span class="fire-icon">🔥</span>
+                    <ruby>火事<rt>かじ</rt></ruby>から<ruby>町<rt>まち</rt></ruby>を<ruby>守<rt>まも</rt></ruby>る
+                    <span class="fire-icon">🔥</span>
+                </h1>
+            </div>
+            <p class="text-lg sm:text-xl font-bold text-gray-700 mb-1">
+                3<ruby>年生<rt>ねんせい</rt></ruby>にできること
+            </p>
+            <p class="text-xs text-gray-600 mt-1">
+                <ruby>小学校<rt>しょうがっこう</rt></ruby> 3<ruby>年生<rt>ねんせい</rt></ruby> <ruby>社会科<rt>しゃかいか</rt></ruby>
+            </p>
+            
+            <!-- 装飾的な要素 -->
+            <div class="flex justify-center gap-4 mt-3">
+                <span class="animate-float" style="animation-delay: 0s;">🚒</span>
+                <span class="animate-float" style="animation-delay: 0.5s;">👨‍🚒</span>
+                <span class="animate-float" style="animation-delay: 1s;">🧯</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- ホーム画面 -->
+            <div id="home-view">
+                <div class="bg-white rounded-lg shadow-sm p-3 mb-4 border-l-4 border-orange-500 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 text-6xl opacity-10 animate-pulse-slow">🛡️</div>
+                    <p class="text-base sm:text-lg mb-1 font-medium relative z-10">
+                        <ruby>火事<rt>かじ</rt></ruby>を<ruby>防<rt>ふせ</rt></ruby>ぐために、みんなができることを<ruby>学<rt>まな</rt></ruby>びましょう。
+                    </p>
+                    <p class="text-sm text-gray-600 relative z-10">
+                        <ruby>気<rt>き</rt></ruby>になる<ruby>項目<rt>こうもく</rt></ruby>を<ruby>選<rt>えら</rt></ruby>んでください。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    
+                    <div class="nav-card bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-sm p-4 cursor-pointer border-l-4 border-blue-500 hover:border-blue-600" data-category="community">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center icon-svg">
+                                <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="text-base font-bold text-blue-700 mb-1">
+                                    <ruby>地域<rt>ちいき</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>と<ruby>一緒<rt>いっしょ</rt></ruby>に
+                                </h2>
+                                <p class="text-xs text-gray-600">
+                                    <ruby>避難訓練<rt>ひなんくんれん</rt></ruby>や<ruby>消防団<rt>しょうぼうだん</rt></ruby>との<ruby>協力<rt>きょうりょく</rt></ruby>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nav-card bg-gradient-to-br from-red-50 to-white rounded-lg shadow-sm p-4 cursor-pointer border-l-4 border-red-500 hover:border-red-600" data-category="doors">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center icon-svg">
+                                <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="text-base font-bold text-red-700 mb-1">
+                                    <ruby>安全<rt>あんぜん</rt></ruby>な<ruby>逃<rt>に</rt></ruby>げ<ruby>道<rt>みち</rt></ruby>
+                                </h2>
+                                <p class="text-xs text-gray-600">
+                                    <ruby>防火扉<rt>ぼうかとびら</rt></ruby>や<ruby>廊下<rt>ろうか</rt></ruby>の<ruby>整理整頓<rt>せいりせいとん</rt></ruby>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nav-card bg-gradient-to-br from-orange-50 to-white rounded-lg shadow-sm p-4 cursor-pointer border-l-4 border-orange-500 hover:border-orange-600" data-category="fire_check">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center icon-svg">
+                                <svg class="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="text-base font-bold text-orange-700 mb-1">
+                                    おうちの<ruby>火<rt>ひ</rt></ruby>の<ruby>元<rt>もと</rt></ruby>チェック
+                                </h2>
+                                <p class="text-xs text-gray-600">
+                                    ガスコンロや<ruby>警報器<rt>けいほうき</rt></ruby>の<ruby>確認<rt>かくにん</rt></ruby>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-card bg-gradient-to-br from-teal-50 to-white rounded-lg shadow-sm p-4 cursor-pointer border-l-4 border-teal-500 hover:border-teal-600" data-category="cleaning">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center icon-svg">
+                                <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="text-base font-bold text-teal-700 mb-1">
+                                    お<ruby>掃除<rt>そうじ</rt></ruby>も<ruby>防火<rt>ぼうか</rt></ruby>
+                                </h2>
+                                <p class="text-xs text-gray-600">
+                                    コンセントの<ruby>埃<rt>ほこり</rt></ruby><ruby>掃除<rt>そうじ</rt></ruby>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nav-card bg-gradient-to-br from-purple-50 to-white rounded-lg shadow-sm p-4 cursor-pointer border-l-4 border-purple-500 hover:border-purple-600" data-category="planning">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center icon-svg">
+                                <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="text-base font-bold text-purple-700 mb-1">
+                                    <ruby>計画<rt>けいかく</rt></ruby>してやってみよう
+                                </h2>
+                                <p class="text-xs text-gray-600">
+                                    ポスターや<ruby>標語<rt>ひょうご</rt></ruby>づくり
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav-card bg-gradient-to-br from-pink-50 to-white rounded-lg shadow-sm p-4 cursor-pointer border-l-4 border-pink-500 hover:border-pink-600" data-category="telling">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center icon-svg">
+                                <svg class="w-7 h-7 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <h2 class="text-base font-bold text-pink-700 mb-1">
+                                    みんなに<ruby>伝<rt>つた</rt></ruby>えよう
+                                </h2>
+                                <p class="text-xs text-gray-600">
+                                    <ruby>低学年<rt>ていがくねん</rt></ruby>や<ruby>家族<rt>かぞく</rt></ruby>への<ruby>啓発<rt>けいはつ</rt></ruby>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- カテゴリー詳細画面 -->
+            <div id="category-view" class="hidden">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <div id="category-header" class="bg-blue-600 p-5">
+                        <button id="back-button" class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-2 px-6 rounded transition-all flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            もどる
+                        </button>
+                    </div>
+                    <div id="category-content" class="p-6 sm:p-8 lg:p-10">
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- フッター -->
+        <footer class="text-center mt-6">
+            <div class="bg-white rounded-lg shadow-sm p-4">
+                <p class="mb-3 text-gray-700 font-medium text-sm">
+                    <ruby>小学校<rt>しょうがっこう</rt></ruby>3<ruby>年生<rt>ねんせい</rt></ruby> <ruby>社会科<rt>しゃかいか</rt></ruby>「<ruby>火事<rt>かじ</rt></ruby>から<ruby>町<rt>まち</rt></ruby>を<ruby>守<rt>まも</rt></ruby>る」
+                </p>
+                <div class="flex flex-col sm:flex-row gap-2 justify-center">
+                    <a href="glossary.html" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-5 rounded transition-all text-sm transform hover:scale-105">
+                        📚 <ruby>用語集<rt>ようごしゅう</rt></ruby>を<ruby>見<rt>み</rt></ruby>る
+                    </a>
+                    <button id="sources-button" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded transition-all text-sm transform hover:scale-105">
+                        📖 <ruby>参考資料<rt>さんこうしりょう</rt></ruby>・<ruby>出典一覧<rt>しゅってんいちらん</rt></ruby>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 出典一覧モーダル -->
+    <div id="sources-modal" class="modal">
+        <div class="modal-content">
+            <div class="bg-indigo-600 p-6 sticky top-0 z-10">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-white">
+                        <ruby>参考資料<rt>さんこうしりょう</rt></ruby>・<ruby>出典一覧<rt>しゅってんいちらん</rt></ruby>
+                    </h2>
+                    <button id="close-modal" class="text-white hover:bg-indigo-700 rounded p-2 transition-all">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-white text-sm mt-2 opacity-90">
+                    このサイトは<ruby>全国<rt>ぜんこく</rt></ruby>の<ruby>実践事例<rt>じっせんじれい</rt></ruby>を<ruby>参考<rt>さんこう</rt></ruby>にしています
+                </p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                
+                <!-- 学校の取り組み -->
+                <div class="border-l-4 border-blue-500 bg-blue-50 p-5 rounded">
+                    <h3 class="text-lg font-bold text-blue-800 mb-3">
+                        <ruby>学校<rt>がっこう</rt></ruby>の<ruby>取<rt>と</rt></ruby>り<ruby>組<rt>く</rt></ruby>み
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded border border-blue-200">
+                            <p class="font-bold text-blue-700 mb-1">
+                                <ruby>徳島県<rt>とくしまけん</rt></ruby>つるぎ<ruby>町立半田小学校<rt>ちょうりつはんだしょうがっこう</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <ruby>学校<rt>がっこう</rt></ruby>の<ruby>防火施設<rt>ぼうかしせつ</rt></ruby>・<ruby>設備調<rt>せつびしら</rt></ruby>べ（3<ruby>年生<rt>ねんせい</rt></ruby>）
+                            </p>
+                            <a href="https://school.e-tokushima.or.jp/es_handa/news/1021798/" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>学校<rt>がっこう</rt></ruby>ウェブサイト
+                            </a>
+                        </div>
+                        <div class="bg-white p-4 rounded border border-blue-200">
+                            <p class="font-bold text-blue-700 mb-1">
+                                <ruby>長野県塩尻市立塩尻小学校<rt>ながのけんしおじりしりつしおじりしょうがっこう</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <ruby>防火<rt>ぼうか</rt></ruby>・<ruby>防災教育<rt>ぼうさいきょういく</rt></ruby>の<ruby>取<rt>と</rt></ruby>り<ruby>組<rt>く</rt></ruby>み
+                            </p>
+                            <a href="https://www.sioshou.jp/p2/p2-4-3/" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>塩尻小学校<rt>しおじりしょうがっこう</rt></ruby>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 少年消防クラブの活動 -->
+                <div class="border-l-4 border-green-500 bg-green-50 p-5 rounded">
+                    <h3 class="text-lg font-bold text-green-800 mb-3">
+                        <ruby>少年消防<rt>しょうねんしょうぼう</rt></ruby>クラブの<ruby>活動<rt>かつどう</rt></ruby>
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded border border-green-200">
+                            <p class="font-bold text-green-700 mb-1">
+                                <ruby>日本防火<rt>にほんぼうか</rt></ruby>・<ruby>防災協会<rt>ぼうさいきょうかい</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <ruby>少年消防<rt>しょうねんしょうぼう</rt></ruby>クラブ（BFC）<ruby>活動事例集<rt>かつどうじれいしゅう</rt></ruby>（PDF）
+                            </p>
+                            <a href="https://www.n-bouka.or.jp/club/pdf/bfc_jirei_2.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>日本防火<rt>にほんぼうか</rt></ruby>・<ruby>防災協会<rt>ぼうさいきょうかい</rt></ruby>（PDF）
+                            </a>
+                        </div>
+                        <div class="bg-white p-4 rounded border border-green-200">
+                            <p class="font-bold text-green-700 mb-1">
+                                <ruby>岐阜県<rt>ぎふけん</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <ruby>少年消防<rt>しょうねんしょうぼう</rt></ruby>クラブ<ruby>活動記録<rt>かつどうきろく</rt></ruby>（PDF）
+                            </p>
+                            <a href="https://www.pref.gifu.lg.jp/uploaded/attachment/418499.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>岐阜県<rt>ぎふけん</rt></ruby>（PDF）
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 自治体の啓発活動 -->
+                <div class="border-l-4 border-orange-500 bg-orange-50 p-5 rounded">
+                    <h3 class="text-lg font-bold text-orange-800 mb-3">
+                        <ruby>自治体<rt>じちたい</rt></ruby>の<ruby>啓発活動<rt>けいはつかつどう</rt></ruby>
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded border border-orange-200">
+                            <p class="font-bold text-orange-700 mb-1">
+                                <ruby>千葉県<rt>ちばけん</rt></ruby><ruby>市原市消防局<rt>いちはらししょうぼうきょく</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <ruby>住宅用火災警報器<rt>じゅうたくようかさいけいほうき</rt></ruby>の<ruby>点検啓発<rt>てんけんけいはつ</rt></ruby>、コンセント<ruby>清掃<rt>せいそう</rt></ruby>キャンペーン
+                            </p>
+                            <a href="https://www.city.ichihara.chiba.jp/article?articleId=60237d40ece4651c88c18f7b" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>市原市消防局<rt>いちはらししょうぼうきょく</rt></ruby>
+                            </a>
+                        </div>
+                        <div class="bg-white p-4 rounded border border-orange-200">
+                            <p class="font-bold text-orange-700 mb-1">
+                                <ruby>兵庫県<rt>ひょうごけん</rt></ruby><ruby>豊岡市消防本部<rt>とよおかししょうぼうほんぶ</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <ruby>家庭<rt>かてい</rt></ruby>の<ruby>防火<rt>ぼうか</rt></ruby>チェックリスト（PDF）
+                            </p>
+                            <a href="https://119.city.toyooka.lg.jp/cmsfiles/contents/0000002/2204/checklist.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>豊岡市消防本部<rt>とよおかししょうぼうほんぶ</rt></ruby>（PDF）
+                            </a>
+                        </div>
+                        <div class="bg-white p-4 rounded border border-orange-200">
+                            <p class="font-bold text-orange-700 mb-1">
+                                <ruby>長野県<rt>ながのけん</rt></ruby><ruby>軽井沢町<rt>かるいざわまち</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <ruby>防火<rt>ぼうか</rt></ruby>チェックシート（PDF）
+                            </p>
+                            <a href="https://www.town.karuizawa.lg.jp/uploaded/attachment/1271.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>軽井沢町<rt>かるいざわまち</rt></ruby>（PDF）
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 児童の作品 -->
+                <div class="border-l-4 border-purple-500 bg-purple-50 p-5 rounded">
+                    <h3 class="text-lg font-bold text-purple-800 mb-3">
+                        <ruby>児童<rt>じどう</rt></ruby>の<ruby>作品<rt>さくひん</rt></ruby>
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded border border-purple-200">
+                            <p class="font-bold text-purple-700 mb-1">
+                                <ruby>新潟県<rt>にいがたけん</rt></ruby><ruby>佐渡市<rt>さどし</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <ruby>小学生防火<rt>しょうがくせいぼうか</rt></ruby>ポスター<ruby>優秀作品<rt>ゆうしゅうさくひん</rt></ruby>（<ruby>令和<rt>れいわ</rt></ruby>4<ruby>年度<rt>ねんど</rt></ruby>）
+                            </p>
+                            <ul class="text-xs text-gray-600 space-y-1 ml-4 mb-2">
+                                <li>• 3<ruby>年生<rt>ねんせい</rt></ruby> <ruby>桝谷<rt>ますや</rt></ruby>くるみ さん</li>
+                                <li>• 5<ruby>年生<rt>ねんせい</rt></ruby> <ruby>佐藤夢琉<rt>さとうゆめる</rt></ruby> さん</li>
+                                <li>• 6<ruby>年生<rt>ねんせい</rt></ruby> <ruby>内田海聖<rt>うちだかいせい</rt></ruby> さん</li>
+                            </ul>
+                            <a href="https://www.city.sado.niigata.jp/soshiki/6003/43114.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>佐渡市<rt>さどし</rt></ruby>ウェブサイト
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 防災劇の実践 -->
+                <div class="border-l-4 border-pink-500 bg-pink-50 p-5 rounded">
+                    <h3 class="text-lg font-bold text-pink-800 mb-3">
+                        <ruby>防災劇<rt>ぼうさいげき</rt></ruby>の<ruby>実践<rt>じっせん</rt></ruby>
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="bg-white p-4 rounded border border-pink-200">
+                            <p class="font-bold text-pink-700 mb-1">
+                                <ruby>愛媛大学<rt>えひめだいがく</rt></ruby>
+                            </p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                クロスロード<ruby>防災劇<rt>ぼうさいげき</rt></ruby>の<ruby>実践<rt>じっせん</rt></ruby>と<ruby>評価<rt>ひょうか</rt></ruby>（<ruby>宇和島市立遊子小学校<rt>うわじましりつゆすしょうがっこう</rt></ruby>）（PDF）
+                            </p>
+                            <a href="https://www.cri.ehime-u.ac.jp/old/wp-content/uploads/2020/04/c7e0dee159970ffc92b053d1a36c8803.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 text-sm source-link inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <ruby>愛媛大学<rt>えひめだいがく</rt></ruby>（PDF）
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 注記 -->
+                <div class="bg-gray-100 p-5 rounded border border-gray-300">
+                    <p class="text-sm text-gray-700 text-center">
+                        ※これらの<ruby>資料<rt>しりょう</rt></ruby>は<ruby>教育目的<rt>きょういくもくてき</rt></ruby>で<ruby>引用<rt>いんよう</rt></ruby>しています。<br>
+                        <ruby>詳<rt>くわ</rt></ruby>しくは<ruby>各自治体<rt>かくじちたい</rt></ruby>や<ruby>学校<rt>がっこう</rt></ruby>のウェブサイトをご<ruby>覧<rt>らん</rt></ruby>ください。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
