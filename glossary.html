@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防火・防災用語集 | 3年生社会科</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'BIZ UDPGothic', 'Noto Sans JP', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.8;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .term-card {
+            transition: all 0.3s ease;
+            animation: slideIn 0.4s ease forwards;
+        }
+        
+        .term-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .category-button {
+            transition: all 0.2s ease;
+        }
+        
+        .category-button.active {
+            transform: scale(1.05);
+        }
+        
+        .search-box {
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .highlight {
+            background-color: #FBBF24;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-bounce-gentle {
+            animation: bounce-gentle 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <div class="container max-w-6xl mx-auto p-3 sm:p-4 lg:p-6 min-h-screen">
+        
+        <!-- ヘッダー -->
+        <header class="text-center mb-4 bg-white rounded-lg shadow-sm p-4 border-t-4 border-indigo-500 relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse"></div>
+            <div class="animate-bounce-gentle inline-block">
+                <h1 class="text-3xl sm:text-4xl font-bold text-indigo-600 mb-2">
+                    📚 <ruby>防火<rt>ぼうか</rt></ruby>・<ruby>防災用語集<rt>ぼうさいようごしゅう</rt></ruby> 📚
+                </h1>
+            </div>
+            <p class="text-lg font-bold text-gray-700 mb-1">
+                <ruby>知<rt>し</rt></ruby>っておきたい<ruby>大切<rt>たいせつ</rt></ruby>な<ruby>言葉<rt>ことば</rt></ruby>
+            </p>
+            <p class="text-xs text-gray-600 mt-1">
+                <ruby>小学校<rt>しょうがっこう</rt></ruby> 3<ruby>年生<rt>ねんせい</rt></ruby> <ruby>社会科<rt>しゃかいか</rt></ruby>
+            </p>
+        </header>
+
+        <main>
+            <!-- 検索ボックス -->
+            <div class="bg-white rounded-lg shadow-sm p-4 mb-4 search-box">
+                <div class="flex items-center gap-2 mb-2">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <label for="search-input" class="font-bold text-gray-700"><ruby>言葉<rt>ことば</rt></ruby>を<ruby>探<rt>さが</rt></ruby>す</label>
+                </div>
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    class="w-full p-3 border-2 border-indigo-200 rounded-lg focus:border-indigo-500 focus:outline-none transition-all" 
+                    placeholder="たとえば「しょうかき」「けむり」「ひのもと」など"
+                >
+                <p class="text-xs text-gray-600 mt-2">💡 ひらがなでも、かんじでも<ruby>探<rt>さが</rt></ruby>せるよ！</p>
+            </div>
+
+            <!-- カテゴリー選択 -->
+            <div class="bg-white rounded-lg shadow-sm p-3 mb-4">
+                <p class="text-sm font-bold text-gray-700 mb-2">カテゴリーで<ruby>絞<rt>しぼ</rt></ruby>り<ruby>込<rt>こ</rt></ruby>む：</p>
+                <div class="flex flex-wrap gap-2">
+                    <button class="category-button active px-3 py-1.5 rounded-full text-sm font-bold bg-indigo-600 text-white" data-category="all">
+                        すべて
+                    </button>
+                    <button class="category-button px-3 py-1.5 rounded-full text-sm font-bold bg-gray-200 text-gray-700 hover:bg-gray-300" data-category="equipment">
+                        <ruby>設備<rt>せつび</rt></ruby>・<ruby>道具<rt>どうぐ</rt></ruby>
+                    </button>
+                    <button class="category-button px-3 py-1.5 rounded-full text-sm font-bold bg-gray-200 text-gray-700 hover:bg-gray-300" data-category="action">
+                        <ruby>行動<rt>こうどう</rt></ruby>・ルール
+                    </button>
+                    <button class="category-button px-3 py-1.5 rounded-full text-sm font-bold bg-gray-200 text-gray-700 hover:bg-gray-300" data-category="people">
+                        <ruby>人<rt>ひと</rt></ruby>・<ruby>組織<rt>そしき</rt></ruby>
+                    </button>
+                    <button class="category-button px-3 py-1.5 rounded-full text-sm font-bold bg-gray-200 text-gray-700 hover:bg-gray-300" data-category="danger">
+                        <ruby>危険<rt>きけん</rt></ruby>なこと
+                    </button>
+                </div>
+            </div>
+
+            <!-- 検索結果カウント -->
+            <div id="results-count" class="text-sm text-gray-600 mb-3 px-2">
+                <span id="count-number">16</span><ruby>個<rt>こ</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>が<ruby>見<rt>み</rt></ruby>つかりました
+            </div>
+
+            <!-- 用語リスト -->
+            <div id="terms-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                
+                <!-- 消火器 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-red-500" data-category="equipment" data-keywords="消火器 しょうかき 火 ひ 消す けす 道具 どうぐ 粉 こな">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle">🧯</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-red-700 mb-1 term-title">
+                                <ruby>消火器<rt>しょうかき</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>小<rt>ちい</rt></ruby>さな<ruby>火<rt>ひ</rt></ruby>を<ruby>消<rt>け</rt></ruby>すための<ruby>道具<rt>どうぐ</rt></ruby>です。レバーを<ruby>握<rt>にぎ</rt></ruby>ると<ruby>粉<rt>こな</rt></ruby>や<ruby>泡<rt>あわ</rt></ruby>が<ruby>出<rt>で</rt></ruby>てきて、<ruby>火<rt>ひ</rt></ruby>を<ruby>消<rt>け</rt></ruby>すことができます。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-red-50 p-2 rounded">
+                                💡 <ruby>学校<rt>がっこう</rt></ruby>やおうちの<ruby>廊下<rt>ろうか</rt></ruby>に<ruby>置<rt>お</rt></ruby>いてあります
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 火災警報器 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-orange-500" data-category="equipment" data-keywords="火災警報器 かさいけいほうき 煙 けむり 熱 ねつ 音 おと 知らせる しらせる">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.1s;">🔔</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-orange-700 mb-1 term-title">
+                                <ruby>火災警報器<rt>かさいけいほうき</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>煙<rt>けむり</rt></ruby>や<ruby>熱<rt>ねつ</rt></ruby>を<ruby>感知<rt>かんち</rt></ruby>すると、<ruby>大<rt>おお</rt></ruby>きな<ruby>音<rt>おと</rt></ruby>で<ruby>火事<rt>かじ</rt></ruby>を<ruby>知<rt>し</rt></ruby>らせてくれる<ruby>機械<rt>きかい</rt></ruby>です。「ピーピー、<ruby>火事<rt>かじ</rt></ruby>です」と<ruby>鳴<rt>な</rt></ruby>ります。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-orange-50 p-2 rounded">
+                                💡 <ruby>天井<rt>てんじょう</rt></ruby>に<ruby>付<rt>つ</rt></ruby>いている<ruby>白<rt>しろ</rt></ruby>い<ruby>丸<rt>まる</rt></ruby>い<ruby>機械<rt>きかい</rt></ruby>です
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 防火扉 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-blue-500" data-category="equipment" data-keywords="防火扉 ぼうかとびら 防火戸 ぼうかど 扉 とびら 火 ひ 煙 けむり 広がる ひろがる">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.2s;">🚪</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-blue-700 mb-1 term-title">
+                                <ruby>防火扉<rt>ぼうかとびら</rt></ruby>（<ruby>防火戸<rt>ぼうかど</rt></ruby>）
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>火事<rt>かじ</rt></ruby>のときに<ruby>自動<rt>じどう</rt></ruby>で<ruby>閉<rt>し</rt></ruby>まって、<ruby>火<rt>ひ</rt></ruby>や<ruby>煙<rt>けむり</rt></ruby>が<ruby>広<rt>ひろ</rt></ruby>がるのを<ruby>防<rt>ふせ</rt></ruby>ぐ<ruby>特別<rt>とくべつ</rt></ruby>な<ruby>扉<rt>とびら</rt></ruby>です。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-blue-50 p-2 rounded">
+                                ⚠️ <ruby>前<rt>まえ</rt></ruby>に<ruby>物<rt>もの</rt></ruby>を<ruby>置<rt>お</rt></ruby>かないようにしましょう
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 消火栓 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-cyan-500" data-category="equipment" data-keywords="消火栓 しょうかせん 水 みず ホース 赤 あか 箱 はこ 壁 かべ">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.3s;">💧</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-cyan-700 mb-1 term-title">
+                                <ruby>消火栓<rt>しょうかせん</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>壁<rt>かべ</rt></ruby>に<ruby>付<rt>つ</rt></ruby>いている<ruby>赤<rt>あか</rt></ruby>い<ruby>箱<rt>はこ</rt></ruby>で、<ruby>中<rt>なか</rt></ruby>にホースが<ruby>入<rt>はい</rt></ruby>っています。<ruby>火事<rt>かじ</rt></ruby>のときに<ruby>水<rt>みず</rt></ruby>を<ruby>出<rt>だ</rt></ruby>して<ruby>消<rt>け</rt></ruby>すことができます。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-cyan-50 p-2 rounded">
+                                💡 <ruby>学校<rt>がっこう</rt></ruby>の<ruby>廊下<rt>ろうか</rt></ruby>にあります
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 煙感知器 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-purple-500" data-category="equipment" data-keywords="煙感知器 けむりかんちき 煙 けむり 見つける みつける 機械 きかい 天井 てんじょう">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.4s;">👃</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-purple-700 mb-1 term-title">
+                                <ruby>煙感知器<rt>けむりかんちき</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>煙<rt>けむり</rt></ruby>を<ruby>見<rt>み</rt></ruby>つけて<ruby>火事<rt>かじ</rt></ruby>を<ruby>知<rt>し</rt></ruby>らせる<ruby>機械<rt>きかい</rt></ruby>です。<ruby>天井<rt>てんじょう</rt></ruby>に<ruby>付<rt>つ</rt></ruby>いていて、<ruby>煙<rt>けむり</rt></ruby>が<ruby>入<rt>はい</rt></ruby>ると<ruby>警報<rt>けいほう</rt></ruby>が<ruby>鳴<rt>な</rt></ruby>ります。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-purple-50 p-2 rounded">
+                                💡 <ruby>火<rt>ひ</rt></ruby>より<ruby>先<rt>さき</rt></ruby>に<ruby>煙<rt>けむり</rt></ruby>を<ruby>見<rt>み</rt></ruby>つけます
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 熱感知器 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-pink-500" data-category="equipment" data-keywords="熱感知器 ねつかんちき 熱 ねつ 温度 おんど 機械 きかい 天井 てんじょう">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.5s;">🌡️</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-pink-700 mb-1 term-title">
+                                <ruby>熱感知器<rt>ねつかんちき</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>温度<rt>おんど</rt></ruby>が<ruby>上<rt>あ</rt></ruby>がると<ruby>反応<rt>はんのう</rt></ruby>して<ruby>火事<rt>かじ</rt></ruby>を<ruby>知<rt>し</rt></ruby>らせる<ruby>機械<rt>きかい</rt></ruby>です。<ruby>天井<rt>てんじょう</rt></ruby>に<ruby>付<rt>つ</rt></ruby>いています。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-pink-50 p-2 rounded">
+                                💡 <ruby>熱<rt>ねつ</rt></ruby>で<ruby>火事<rt>かじ</rt></ruby>を<ruby>見<rt>み</rt></ruby>つけます
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- おかしも -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-green-500" data-category="action" data-keywords="おかしも 押さない おさない 駆けない かけない しゃべらない 戻らない もどらない 避難 ひなん ルール">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle">🏃</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-green-700 mb-1 term-title">
+                                おかしも
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>避難<rt>ひなん</rt></ruby>するときの<ruby>大切<rt>たいせつ</rt></ruby>なルールです。
+                            </p>
+                            <div class="bg-green-50 p-3 rounded space-y-1 text-sm">
+                                <p><span class="font-bold text-green-800 text-lg">お</span>：<ruby>押<rt>お</rt></ruby>さない</p>
+                                <p><span class="font-bold text-green-800 text-lg">か</span>：<ruby>駆<rt>か</rt></ruby>けない</p>
+                                <p><span class="font-bold text-green-800 text-lg">し</span>：しゃべらない</p>
+                                <p><span class="font-bold text-green-800 text-lg">も</span>：<ruby>戻<rt>もど</rt></ruby>らない</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 避難訓練 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-teal-500" data-category="action" data-keywords="避難訓練 ひなんくんれん 避難 ひなん 訓練 くんれん 練習 れんしゅう 逃げる にげる">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.1s;">👥</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-teal-700 mb-1 term-title">
+                                <ruby>避難訓練<rt>ひなんくんれん</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>火事<rt>かじ</rt></ruby>や<ruby>地震<rt>じしん</rt></ruby>のときに、<ruby>安全<rt>あんぜん</rt></ruby>に<ruby>逃<rt>に</rt></ruby>げる<ruby>練習<rt>れんしゅう</rt></ruby>をすることです。<ruby>学校<rt>がっこう</rt></ruby>では<ruby>定期的<rt>ていきてき</rt></ruby>に<ruby>行<rt>おこな</rt></ruby>います。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-teal-50 p-2 rounded">
+                                💡 <ruby>訓練<rt>くんれん</rt></ruby>を<ruby>真剣<rt>しんけん</rt></ruby>にやることが<ruby>大切<rt>たいせつ</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 119番 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-red-500" data-category="action" data-keywords="119番 119ばん ひゃくじゅうきゅうばん 電話 でんわ 消防車 しょうぼうしゃ 救急車 きゅうきゅうしゃ">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.2s;">📞</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-red-700 mb-1 term-title">
+                                119<ruby>番<rt>ばん</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>火事<rt>かじ</rt></ruby>や<ruby>救急<rt>きゅうきゅう</rt></ruby>のときにかける<ruby>電話番号<rt>でんわばんごう</rt></ruby>です。<ruby>消防車<rt>しょうぼうしゃ</rt></ruby>や<ruby>救急車<rt>きゅうきゅうしゃ</rt></ruby>が<ruby>来<rt>き</rt></ruby>てくれます。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-red-50 p-2 rounded">
+                                ⚠️ いたずらで<ruby>電話<rt>でんわ</rt></ruby>してはいけません
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 消防士 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-blue-500" data-category="people" data-keywords="消防士 しょうぼうし 消防署 しょうぼうしょ 火 ひ 消す けす 助ける たすける 仕事 しごと">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.3s;">🚒</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-blue-700 mb-1 term-title">
+                                <ruby>消防士<rt>しょうぼうし</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>火事<rt>かじ</rt></ruby>を<ruby>消<rt>け</rt></ruby>したり、<ruby>人<rt>ひと</rt></ruby>を<ruby>助<rt>たす</rt></ruby>けたりする<ruby>仕事<rt>しごと</rt></ruby>をしている<ruby>人<rt>ひと</rt></ruby>です。<ruby>消防署<rt>しょうぼうしょ</rt></ruby>で<ruby>働<rt>はたら</rt></ruby>いています。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-blue-50 p-2 rounded">
+                                💡 24<ruby>時間<rt>じかん</rt></ruby>いつでも<ruby>出動<rt>しゅつどう</rt></ruby>できます
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 消防団 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-indigo-500" data-category="people" data-keywords="消防団 しょうぼうだん 地域 ちいき チーム ボランティア 協力 きょうりょく">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.4s;">👨‍🚒</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-indigo-700 mb-1 term-title">
+                                <ruby>消防団<rt>しょうぼうだん</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>地域<rt>ちいき</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>たちで<ruby>作<rt>つく</rt></ruby>る<ruby>消防<rt>しょうぼう</rt></ruby>のチームです。<ruby>普段<rt>ふだん</rt></ruby>は<ruby>別<rt>べつ</rt></ruby>の<ruby>仕事<rt>しごと</rt></ruby>をしていますが、<ruby>火事<rt>かじ</rt></ruby>のときは<ruby>消防士<rt>しょうぼうし</rt></ruby>と<ruby>協力<rt>きょうりょく</rt></ruby>します。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-indigo-50 p-2 rounded">
+                                💡 <ruby>地域<rt>ちいき</rt></ruby>を<ruby>守<rt>まも</rt></ruby>るボランティア
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 少年消防クラブ -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-purple-500" data-category="people" data-keywords="少年消防クラブ しょうねんしょうぼうくらぶ BFC クラブ 小学生 しょうがくせい 中学生 ちゅうがくせい 活動 かつどう">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.5s;">👦👧</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-purple-700 mb-1 term-title">
+                                <ruby>少年消防<rt>しょうねんしょうぼう</rt></ruby>クラブ（BFC）
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>小学生<rt>しょうがくせい</rt></ruby>や<ruby>中学生<rt>ちゅうがくせい</rt></ruby>が<ruby>防火<rt>ぼうか</rt></ruby>について<ruby>学<rt>まな</rt></ruby>んだり、<ruby>活動<rt>かつどう</rt></ruby>したりするクラブです。BFCは「Boys and Girls Fire Club」の<ruby>略<rt>りゃく</rt></ruby>です。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-purple-50 p-2 rounded">
+                                💡 <ruby>防火<rt>ぼうか</rt></ruby>ポスターづくりなどをします
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- トラッキング現象 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-yellow-500" data-category="danger" data-keywords="トラッキング現象 とらっきんぐげんしょう コンセント こんせんと 埃 ほこり 湿気 しっけ 電気 でんき 火 ひ">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle">⚡</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-yellow-700 mb-1 term-title">
+                                トラッキング<ruby>現象<rt>げんしょう</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                コンセントに<ruby>埃<rt>ほこり</rt></ruby>がたまり、そこに<ruby>湿気<rt>しっけ</rt></ruby>がつくと<ruby>電気<rt>でんき</rt></ruby>が<ruby>流<rt>なが</rt></ruby>れて<ruby>火<rt>ひ</rt></ruby>が<ruby>出<rt>で</rt></ruby>る<ruby>現象<rt>げんしょう</rt></ruby>です。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-yellow-50 p-2 rounded">
+                                ⚠️ コンセントの<ruby>掃除<rt>そうじ</rt></ruby>が<ruby>大切<rt>たいせつ</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- たこ足配線 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-orange-500" data-category="danger" data-keywords="たこ足配線 たこあしはいせん コンセント こんせんと プラグ ぷらぐ 熱 あつ 危険 きけん">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.1s;">🔌</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-orange-700 mb-1 term-title">
+                                たこ<ruby>足配線<rt>あしはいせん</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                1つのコンセントに、たくさんのプラグを<ruby>差<rt>さ</rt></ruby>すことです。<ruby>使<rt>つか</rt></ruby>いすぎると<ruby>熱<rt>あつ</rt></ruby>くなって<ruby>火事<rt>かじ</rt></ruby>になる<ruby>危険<rt>きけん</rt></ruby>があります。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-orange-50 p-2 rounded">
+                                ⚠️ たこの<ruby>足<rt>あし</rt></ruby>のように<ruby>広<rt>ひろ</rt></ruby>がるのでこの<ruby>名前<rt>なまえ</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 煙 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-gray-500" data-category="danger" data-keywords="煙 けむり 危険 きけん 吸う すう 前 まえ 見えない みえない 姿勢 しせい">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.2s;">💨</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-700 mb-1 term-title">
+                                <ruby>煙<rt>けむり</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>火事<rt>かじ</rt></ruby>で<ruby>一番危険<rt>いちばんきけん</rt></ruby>なのは<ruby>煙<rt>けむり</rt></ruby>です。<ruby>煙<rt>けむり</rt></ruby>を<ruby>吸<rt>す</rt></ruby>うと<ruby>苦<rt>くる</rt></ruby>しくなり、<ruby>前<rt>まえ</rt></ruby>が<ruby>見<rt>み</rt></ruby>えなくなります。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-gray-100 p-2 rounded">
+                                ⚠️ <ruby>低<rt>ひく</rt></ruby>い<ruby>姿勢<rt>しせい</rt></ruby>で<ruby>逃<rt>に</rt></ruby>げましょう
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 初期消火 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-teal-500" data-category="action" data-keywords="初期消火 しょきしょうか 火 ひ 小さい ちいさい 消す けす 消火器 しょうかき">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.3s;">💦</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-teal-700 mb-1 term-title">
+                                <ruby>初期消火<rt>しょきしょうか</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>火<rt>ひ</rt></ruby>が<ruby>小<rt>ちい</rt></ruby>さいうちに<ruby>消<rt>け</rt></ruby>すことです。<ruby>消火器<rt>しょうかき</rt></ruby>などを<ruby>使<rt>つか</rt></ruby>います。<ruby>火<rt>ひ</rt></ruby>が<ruby>大<rt>おお</rt></ruby>きくなったら<ruby>逃<rt>に</rt></ruby>げることが<ruby>大切<rt>たいせつ</rt></ruby>です。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-teal-50 p-2 rounded">
+                                💡 <ruby>天井<rt>てんじょう</rt></ruby>まで<ruby>届<rt>とど</rt></ruby>いたら<ruby>逃<rt>に</rt></ruby>げる
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 防火 -->
+                <div class="term-card bg-white rounded-lg shadow-sm p-4 border-l-4 border-red-500" data-category="action" data-keywords="防火 ぼうか 火 ひ 防ぐ ふせぐ 火の元 ひのもと 確認 かくにん 整理整頓 せいりせいとん">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 text-4xl animate-bounce-gentle" style="animation-delay: 0.4s;">🛡️</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-red-700 mb-1 term-title">
+                                <ruby>防火<rt>ぼうか</rt></ruby>
+                            </h3>
+                            <p class="text-sm text-gray-700 mb-2 term-description">
+                                <ruby>火事<rt>かじ</rt></ruby>が<ruby>起<rt>お</rt></ruby>きないように<ruby>気<rt>き</rt></ruby>をつけることです。<ruby>火<rt>ひ</rt></ruby>の<ruby>元<rt>もと</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>したり、<ruby>整理整頓<rt>せいりせいとん</rt></ruby>したりすることが<ruby>防火<rt>ぼうか</rt></ruby>につながります。
+                            </p>
+                            <p class="text-xs text-gray-600 bg-red-50 p-2 rounded">
+                                💡 「<ruby>火<rt>ひ</rt></ruby>を<ruby>防<rt>ふせ</rt></ruby>ぐ」という<ruby>意味<rt>いみ</rt></ruby>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 検索結果なしメッセージ -->
+            <div id="no-results" class="hidden text-center py-12">
+                <div class="text-6xl mb-4">🔍</div>
+                <p class="text-xl font-bold text-gray-700 mb-2">
+                    その<ruby>言葉<rt>ことば</rt></ruby>は<ruby>見<rt>み</rt></ruby>つかりませんでした
+                </p>
+                <p class="text-sm text-gray-600">
+                    <ruby>別<rt>べつ</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>で<ruby>探<rt>さが</rt></ruby>してみてください
+                </p>
+            </div>
+        </main>
+
+        <!-- フッター -->
+        <footer class="text-center mt-6">
+            <div class="bg-white rounded-lg shadow-sm p-4">
+                <p class="text-sm text-gray-700 font-medium mb-2">
+                    <ruby>小学校<rt>しょうがっこう</rt></ruby>3<ruby>年生<rt>ねんせい</rt></ruby> <ruby>社会科<rt>しゃかいか</rt></ruby>「<ruby>火事<rt>かじ</rt></ruby>から<ruby>町<rt>まち</rt></ruby>を<ruby>守<rt>まも</rt></ruby>る」
+                </p>
+                <a href="index.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-5 rounded transition-all text-sm transform hover:scale-105">
+                    メインページに<ruby>戻<rt>もど</rt></ruby>る
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="glossary.js"></script>
+</body>
+</html>
+
